@@ -8,8 +8,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.Collection;
 
+@Transactional(Transactional.TxType.SUPPORTS)
 public class MovieDBRepository implements IMovieRepository {
 
     private static final Logger LOGGER = Logger.getLogger(MovieDBRepository.class);
@@ -35,6 +37,14 @@ public class MovieDBRepository implements IMovieRepository {
             return "{\"message\":\"Movie could not be found\"}";
         }
         else return util.getJSONForObject(movie);
+    }
+
+    @Override
+    @Transactional(Transactional.TxType.REQUIRED)
+    public String addMovie(String movie) {
+        Movie movieToBeAdded = util.getObjectForJSON(movie, Movie.class);
+        manager.persist(movieToBeAdded);
+        return "{\"message\":\"Movie cureated\"}";
     }
 
     private Movie findMovie(Long id) {
