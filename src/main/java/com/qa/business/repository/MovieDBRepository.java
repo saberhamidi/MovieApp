@@ -60,6 +60,20 @@ public class MovieDBRepository implements IMovieRepository {
         }
     }
 
+    @Override
+    @Transactional(Transactional.TxType.REQUIRED)
+    public String updateMovie(String movie) {
+        Movie updatedMovie = util.getObjectForJSON(movie, Movie.class);
+        Movie foundMovie = this.findMovie(updatedMovie.getId());
+        if(foundMovie == null){
+            return "{\"message\":\"Movie could't be found!\"}";
+        }
+        else {
+            manager.merge(updatedMovie);
+            return "{\"message\":\"Movie successfully updated!\"}";
+        }
+    }
+
     private Movie findMovie(Long id) {
         return manager.find(Movie.class, id);
     }

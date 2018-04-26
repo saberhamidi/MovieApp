@@ -38,9 +38,16 @@ public class MovieEndPoint {
 
     @DELETE
     @Path("/json/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteMovie(@PathParam("id") @Min(1) Long id){
         return service.deleteMovie(id);
+    }
+
+    @PUT
+    @Path("/json")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateMovie(String movie){
+       return service.updateMovie(movie);
     }
 }
