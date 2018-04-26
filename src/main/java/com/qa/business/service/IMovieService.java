@@ -6,5 +6,6 @@ public interface IMovieService {
     String getMovie(Long id);
     String addMovie(String movie);
     String deleteMovie(Long id);
+    String updateMovie(String movie);
 
 }

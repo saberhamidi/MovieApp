@@ -29,4 +29,9 @@ public class MovieService implements IMovieService {
     public String deleteMovie(Long id) {
         return repository.deleteMovie(id);
     }
+
+    @Override
+    public String updateMovie(String movie) {
+        return repository.updateMovie(movie);
+    }
 }
