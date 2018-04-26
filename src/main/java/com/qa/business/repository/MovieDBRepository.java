@@ -4,6 +4,7 @@ import com.qa.persistence.domain.Movie;
 import com.qa.util.JSONUtil;
 import org.apache.log4j.Logger;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.Collection;
 
+@Default
 @Transactional(Transactional.TxType.SUPPORTS)
 public class MovieDBRepository implements IMovieRepository {
 
