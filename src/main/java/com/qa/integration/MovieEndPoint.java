@@ -35,4 +35,12 @@ public class MovieEndPoint {
     public String addMovie(String movie){
         return  service.addMovie(movie);
     }
+
+    @DELETE
+    @Path("/json/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteMovie(@PathParam("id") @Min(1) Long id){
+        return service.deleteMovie(id);
+    }
 }
