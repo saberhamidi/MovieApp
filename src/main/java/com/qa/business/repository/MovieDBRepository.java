@@ -27,4 +27,17 @@ public class MovieDBRepository implements IMovieRepository {
         Collection<Movie> movies = (Collection<Movie>) query.getResultList();
         return util.getJSONForObject(movies);
     }
+
+    @Override
+    public String getMovie(Long id) {
+        Movie movie = findMovie(id);
+        if(movie == null){
+            return "{\"message\":\"Movie could not be found\"}";
+        }
+        else return util.getJSONForObject(movie);
+    }
+
+    private Movie findMovie(Long id) {
+        return manager.find(Movie.class, id);
+    }
 }
