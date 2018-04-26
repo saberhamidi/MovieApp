@@ -4,10 +4,7 @@ import com.qa.business.service.IMovieService;
 
 import javax.inject.Inject;
 import javax.validation.constraints.Min;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("movie")
@@ -29,5 +26,13 @@ public class MovieEndPoint {
     @Produces(MediaType.APPLICATION_JSON)
     public String getMovie(@PathParam("id") @Min(1) Long id){
         return  service.getMovie(id);
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/json")
+    public String addMovie(String movie){
+        return  service.addMovie(movie);
     }
 }
